@@ -5,7 +5,9 @@ import mongoose from "mongoose";
 import eventsRouter from "./routes/events.js";
 import incidentsRouter from "./routes/incidents.js";
 import dashboardRouter from "./routes/dashboard.js";
+import licenseRouter from "./routes/license.js";
 import { requireApiKey } from "./middleware/auth.js";
+import { licenseGate } from "./middleware/license-gate.js";
 
 const app = express();
 
@@ -14,8 +16,11 @@ app.use(express.json({ limit: "1mb" }));
 
 app.get("/health", (_req, res) => res.json({ ok: true, ts: new Date().toISOString() }));
 
-// All /v1 routes require an API key
-app.use("/v1", requireApiKey);
+// License routes — require API key but NOT the license gate (so buyer can activate)
+app.use("/v1/license", requireApiKey, licenseRouter);
+
+// All other /v1 routes require API key AND a valid license
+app.use("/v1", requireApiKey, licenseGate);
 app.use("/v1/events", eventsRouter);
 app.use("/v1/incidents", incidentsRouter);
 app.use("/v1/dashboard", dashboardRouter);

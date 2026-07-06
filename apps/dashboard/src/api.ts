@@ -75,4 +75,23 @@ export const api = {
 
   getOrderTimeline: (orderId: string) =>
     apiFetch<{ orderId: string; events: unknown[] }>(`/v1/events/orders/${orderId}/timeline`),
+
+  // License
+  getLicenseStatus: () =>
+    apiFetch<{
+      activated: boolean; valid?: boolean; status?: string;
+      clientName?: string; planName?: string;
+      daysRemaining?: number | null; expiresAt?: string | null; lastCheckedAt?: string;
+    }>(`/v1/license/status`),
+
+  activateLicense: (licenseKey: string) =>
+    apiFetch<{ success: boolean; clientName: string; planName: string | null; status: string; daysRemaining: number | null; expiresAt: string | null }>(
+      `/v1/license/activate`, { method: "POST", body: JSON.stringify({ licenseKey }) }
+    ),
+
+  refreshLicense: () =>
+    apiFetch<{ valid: boolean; status: string }>(`/v1/license/refresh`, { method: "POST" }),
+
+  deactivateLicense: () =>
+    apiFetch<{ success: boolean }>(`/v1/license`, { method: "DELETE" }),
 };
