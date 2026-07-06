@@ -1,0 +1,26 @@
+{
+  "name": "@commerce-watchdog/node-sdk",
+  "version": "1.0.0",
+  "description": "Server-side Node.js SDK for Commerce Watchdog — send pipeline events from backend services",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@commerce-watchdog/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}

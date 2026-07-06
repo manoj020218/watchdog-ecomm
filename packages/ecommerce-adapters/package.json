@@ -1,0 +1,16 @@
+{
+  "name": "@commerce-watchdog/ecommerce-adapters",
+  "version": "1.0.0",
+  "description": "Platform adapters for Commerce Watchdog — Shopify, WooCommerce, Magento, OpenCart, PrestaShop",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@commerce-watchdog/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
